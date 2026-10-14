@@ -1,0 +1,192 @@
+import os, zipfile, textwrap
+
+base = "/mnt/data/cybersecurity-portfolio"
+os.makedirs(base, exist_ok=True)
+
+files = {
+"index.html": r'''<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Abu Noman's cybersecurity and computer science portfolio.">
+  <title>Abu Noman | Cybersecurity Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Abu Noman home"><span class="brand-mark">AN</span><span>abu<span class="accent">noman</span></span></a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      <div class="nav-links" id="nav-links">
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#education">Education</a><a class="nav-contact" href="#contact">Contact <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero section container" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="status-dot"></span> COMPUTER SCIENCE • CYBERSECURITY</p>
+        <h1>Building a safer<br>digital <span class="gradient-text">world.</span></h1>
+        <p class="hero-intro">Hi, I'm <strong>Abu Noman</strong> — a Computer Science and Engineering graduate building practical skills in network security, ethical hacking, and security research.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects">Explore my work <span aria-hidden="true">↘</span></a>
+          <a class="button button-secondary" href="#contact">Get in touch</a>
+        </div>
+        <div class="hero-meta"><span><span class="meta-icon">⌁</span> Network Security</span><span><span class="meta-icon">⌘</span> Learning by building</span></div>
+      </div>
+      <div class="terminal-card" aria-label="Decorative terminal illustration">
+        <div class="terminal-top"><div class="window-dots"><i></i><i></i><i></i></div><span>noman@portfolio:~</span><span class="terminal-lock">▣</span></div>
+        <div class="terminal-body">
+          <p><span class="term-muted">┌──(</span><span class="term-green">noman㉿kali</span><span class="term-muted">)-[~]</span></p>
+          <p><span class="term-green">$</span> whoami</p><p class="term-output">Abu Noman</p>
+          <p><span class="term-green">$</span> cat focus.txt</p>
+          <p class="term-output">Network Security<br>Ethical Hacking<br>Security Research</p>
+          <p><span class="term-green">$</span> echo $STATUS</p><p class="term-output"><span class="term-green">LEARNING • BUILDING • DOCUMENTING</span></p>
+          <p class="terminal-cursor"><span class="term-green">$</span> <span class="cursor">▋</span></p>
+        </div>
+        <div class="terminal-footer"><span>● SYSTEM ONLINE</span><span>PORTFOLIO v1.0</span></div>
+      </div>
+      <div class="hero-grid" aria-hidden="true"></div>
+    </section>
+
+    <section class="section section-border" id="about">
+      <div class="container two-col">
+        <div><p class="eyebrow">01 / ABOUT ME</p><h2>Curiosity is where<br><span class="accent">security begins.</span></h2></div>
+        <div class="section-copy"><p>I hold a BSc in Computer Science and Engineering from the University of Global Village, Bangladesh. I'm developing my cybersecurity foundation through hands-on labs, practical projects, and consistent documentation.</p><p>My current focus is network security, Linux, and learning how to identify and explain security weaknesses responsibly. I aim to pursue postgraduate study and grow into a security professional who builds useful, ethical solutions.</p><div class="fact-row"><div><strong>2022</strong><span>BSc graduation</span></div><div><strong>Network</strong><span>Preferred focus</span></div><div><strong>2 hrs/day</strong><span>Learning routine</span></div></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <p class="eyebrow">02 / TOOLKIT</p><h2>Skills I'm <span class="accent">developing.</span></h2>
+        <p class="section-lead">A transparent snapshot of my current learning path. I'll update this section as I gain experience and complete projects.</p>
+        <div class="skills-grid">
+          <article class="skill-card"><span class="skill-number">01</span><div class="skill-icon">⌘</div><h3>Operating Systems</h3><p>Kali Linux · Linux command line</p><span class="level"><i style="width:35%"></i></span><small>Foundational / learning</small></article>
+          <article class="skill-card"><span class="skill-number">02</span><div class="skill-icon">⌁</div><h3>Network Security</h3><p>Networking concepts · Recon basics</p><span class="level"><i style="width:25%"></i></span><small>Foundational / learning</small></article>
+          <article class="skill-card"><span class="skill-number">03</span><div class="skill-icon">{ }</div><h3>Programming</h3><p>Python fundamentals · Bash basics</p><span class="level"><i style="width:10%"></i></span><small>Beginner / learning</small></article>
+          <article class="skill-card"><span class="skill-number">04</span><div class="skill-icon">◎</div><h3>Security Practice</h3><p>Authorized labs · Technical write-ups</p><span class="level"><i style="width:20%"></i></span><small>Building experience</small></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-border" id="projects">
+      <div class="container">
+        <p class="eyebrow">03 / SELECTED WORK</p><h2>Projects with <span class="accent">purpose.</span></h2>
+        <p class="section-lead">Replace these starter cards with your own completed projects. Only describe work you have actually done.</p>
+        <div class="projects-grid">
+          <article class="project-card"><div class="project-top"><span class="project-tag">NETWORK SECURITY</span><span class="project-symbol">↗</span></div><h3>Network Reconnaissance Lab</h3><p>A controlled lab to learn host discovery, service identification, and how to document findings clearly and responsibly.</p><div class="tags"><span>Kali Linux</span><span>Nmap</span><span>Documentation</span></div><a class="text-link" href="#contact">Project write-up coming soon <span>→</span></a></article>
+          <article class="project-card"><div class="project-top"><span class="project-tag">LINUX</span><span class="project-symbol">⌘</span></div><h3>Linux Security Notes</h3><p>A beginner-friendly collection of Linux commands, permission concepts, and defensive security notes with examples.</p><div class="tags"><span>Linux</span><span>Bash</span><span>Markdown</span></div><a class="text-link" href="#contact">Project write-up coming soon <span>→</span></a></article>
+          <article class="project-card"><div class="project-top"><span class="project-tag">PYTHON</span><span class="project-symbol">{ }</span></div><h3>Security Log Analyzer</h3><p>A planned Python project to parse sample log files, flag selected patterns, and produce a readable summary for learning.</p><div class="tags"><span>Python</span><span>Logs</span><span>Blue Team</span></div><a class="text-link" href="#contact">Project in progress <span>→</span></a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="container two-col">
+        <div><p class="eyebrow">04 / EDUCATION</p><h2>Academic <span class="accent">foundation.</span></h2></div>
+        <div class="timeline"><article class="timeline-item"><span class="timeline-dot"></span><p class="timeline-date">2018 — 2022</p><h3>BSc in Computer Science & Engineering</h3><p class="timeline-place">University of Global Village · Barishal, Bangladesh</p><p>CGPA: 3.00 / 4.00</p></article><article class="timeline-item"><span class="timeline-dot"></span><p class="timeline-date">CURRENT FOCUS</p><h3>Cybersecurity & Network Security</h3><p class="timeline-place">Independent learning and practical portfolio development</p><p>Preparing for postgraduate study and research opportunities in cybersecurity.</p></article></div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container contact-box"><div><p class="eyebrow">05 / CONTACT</p><h2>Let's connect and<br><span class="accent">learn together.</span></h2><p class="section-lead">Interested in cybersecurity research, academic opportunities, or exchanging ideas? Feel free to reach out.</p></div><div class="contact-links"><a href="mailto:YOUR_EMAIL@example.com"><span class="contact-icon">@</span><span><small>Email</small><strong>YOUR_EMAIL@example.com</strong></span><span class="arrow">↗</span></a><a href="https://github.com/YOUR_GITHUB" target="_blank" rel="noreferrer"><span class="contact-icon">⌘</span><span><small>GitHub</small><strong>github.com/YOUR_GITHUB</strong></span><span class="arrow">↗</span></a><a href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noreferrer"><span class="contact-icon">in</span><span><small>LinkedIn</small><strong>linkedin.com/in/YOUR_LINKEDIN</strong></span><span class="arrow">↗</span></a></div></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><a class="brand" href="#home"><span class="brand-mark">AN</span><span>abu<span class="accent">noman</span></span></a><p>Built with care, curiosity, and a security-first mindset.</p><a href="#home" class="back-top">Back to top ↑</a></div><div class="container copyright">© <span id="year"></span> Abu Noman. Personal portfolio.</div></footer>
+</body>
+</html>
+''',
+"styles.css": r'''/* Abu Noman portfolio — responsive, accessible starter stylesheet */
+:root{--bg:#080d13;--surface:#0d151e;--surface2:#101d27;--text:#eef5f5;--muted:#9aabb5;--line:#1d303b;--green:#67f5b1;--green2:#28c98a;--mono:"DM Mono",monospace;--sans:"Inter",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65}a{color:inherit;text-decoration:none}.container{width:min(1120px,calc(100% - 48px));margin-inline:auto}.section{padding:100px 0}.section-border{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:linear-gradient(110deg,rgba(16,29,39,.58),transparent 65%)}.site-header{position:sticky;top:0;z-index:10;background:rgba(8,13,19,.86);backdrop-filter:blur(18px);border-bottom:1px solid rgba(29,48,59,.8)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between}.brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.04em;font-size:18px}.brand-mark{display:grid;place-items:center;width:35px;height:35px;border:1px solid #2d6954;border-radius:10px;color:var(--green);font-family:var(--mono);font-size:12px;letter-spacing:0}.accent{color:var(--green)}.nav-links{display:flex;align-items:center;gap:32px;color:var(--muted);font-size:13px}.nav-links a:hover,.text-link:hover,.back-top:hover{color:var(--green)}.nav-contact{border:1px solid #315246;padding:9px 14px;border-radius:8px;color:var(--text)!important}.nav-contact span{color:var(--green);margin-left:7px}.menu-toggle{display:none;background:none;border:0;padding:8px}.menu-toggle span{display:block;width:24px;height:2px;margin:5px;background:var(--text)}.hero{min-height:640px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:70px;position:relative;overflow:hidden}.hero-copy{position:relative;z-index:1}.eyebrow{font:11px var(--mono);letter-spacing:.12em;color:var(--green);margin:0 0 22px}.status-dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:9px;box-shadow:0 0 12px #67f5b177}.hero h1{font-size:clamp(48px,6.5vw,76px);line-height:1.04;letter-spacing:-.065em;margin:0 0 25px;font-weight:800}.gradient-text{background:linear-gradient(90deg,#67f5b1,#9be8ff);background-clip:text;-webkit-background-clip:text;color:transparent}.hero-intro{color:var(--muted);max-width:540px;font-size:16px}.hero-intro strong{color:var(--text)}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0}.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:12px 18px;border-radius:8px;font-size:13px;font-weight:700;transition:transform .2s,background .2s}.button:hover{transform:translateY(-2px)}.button-primary{background:var(--green);color:#07120d}.button-secondary{border:1px solid #30424c;color:var(--text)}.hero-meta{display:flex;gap:23px;flex-wrap:wrap;color:var(--muted);font:11px var(--mono)}.meta-icon{color:var(--green);font-size:16px;margin-right:5px}.terminal-card{position:relative;z-index:1;background:#091118;border:1px solid #29413e;border-radius:13px;box-shadow:0 24px 90px #0008,0 0 70px #1fbc7820;overflow:hidden;transform:rotate(1deg)}.terminal-top{height:45px;border-bottom:1px solid #1e3037;display:flex;align-items:center;gap:14px;padding:0 16px;color:#82959c;font:11px var(--mono)}.window-dots{display:flex;gap:5px}.window-dots i{width:7px;height:7px;border-radius:50%;background:#36534d}.window-dots i:first-child{background:#e77f75}.window-dots i:nth-child(2){background:#e8c76f}.window-dots i:nth-child(3){background:#68d59a}.terminal-lock{margin-left:auto}.terminal-body{padding:25px 24px 18px;font:12px/1.9 var(--mono);min-height:285px}.terminal-body p{margin:0 0 8px}.term-muted{color:#7d929d}.term-green{color:var(--green)}.term-output{color:#c0d1d5;padding-left:16px}.cursor{animation:blink 1.1s step-end infinite;color:var(--green)}@keyframes blink{50%{opacity:0}}.terminal-footer{display:flex;justify-content:space-between;padding:12px 16px;border-top:1px solid #1e3037;color:#6f898d;font:9px var(--mono);letter-spacing:.08em}.hero-grid{position:absolute;width:450px;height:450px;right:-160px;top:30px;opacity:.12;background-image:linear-gradient(#67f5b1 1px,transparent 1px),linear-gradient(90deg,#67f5b1 1px,transparent 1px);background-size:35px 35px;mask-image:radial-gradient(circle,#000,transparent 70%)}h2{font-size:clamp(32px,4vw,46px);line-height:1.15;letter-spacing:-.05em;margin:0 0 20px}.two-col{display:grid;grid-template-columns:.85fr 1.15fr;gap:90px}.section-copy{color:var(--muted);font-size:14px}.fact-row{display:flex;gap:32px;border-top:1px solid var(--line);padding-top:24px;margin-top:30px}.fact-row div{display:flex;flex-direction:column;gap:3px}.fact-row strong{font-size:17px;color:var(--green)}.fact-row span{font-size:11px;color:var(--muted)}.section-lead{max-width:610px;color:var(--muted);font-size:14px;margin:0 0 34px}.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}.skill-card{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 18px;min-width:0}.skill-number{position:absolute;right:16px;top:15px;font:10px var(--mono);color:#526770}.skill-icon{height:45px;width:45px;display:grid;place-items:center;border-radius:10px;background:#10291f;color:var(--green);font:20px var(--mono);margin-bottom:20px}.skill-card h3,.project-card h3,.timeline-item h3{font-size:15px;margin:0 0 9px;letter-spacing:-.02em}.skill-card p{min-height:43px;font-size:11px;color:var(--muted);margin:0 0 15px}.level{display:block;height:3px;background:#20313a;border-radius:9px;overflow:hidden;margin-bottom:9px}.level i{display:block;height:100%;background:var(--green);border-radius:9px}.skill-card small{font-size:10px;color:#82949c}.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.project-card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;display:flex;flex-direction:column;min-height:300px;transition:border-color .2s,transform .2s}.project-card:hover{border-color:#3c8064;transform:translateY(-3px)}.project-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.project-tag{font:9px var(--mono);letter-spacing:.1em;color:var(--green)}.project-symbol{font:20px var(--mono);color:#638176}.project-card p{font-size:12px;color:var(--muted);margin:0 0 20px}.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;margin-bottom:22px}.tags span{font:9px var(--mono);color:#a7b8bf;border:1px solid #263943;padding:5px 7px;border-radius:5px}.text-link{font-size:11px;color:var(--green);font-weight:600}.text-link span{margin-left:6px}.timeline{border-left:1px solid #294339;padding-left:30px}.timeline-item{position:relative;padding-bottom:36px}.timeline-dot{position:absolute;left:-35px;top:6px;width:9px;height:9px;background:var(--green);border-radius:50%;box-shadow:0 0 0 5px #67f5b115}.timeline-date{font:10px var(--mono);color:var(--green);letter-spacing:.08em;margin:0 0 10px}.timeline-item h3{font-size:17px}.timeline-place{font-size:12px;color:var(--muted);margin:0 0 8px}.timeline-item>p:last-child{font-size:12px;color:#a9b7bd;margin:0}.contact-section{padding-top:80px;padding-bottom:80px}.contact-box{display:grid;grid-template-columns:1fr .8fr;gap:80px;align-items:center;border:1px solid #29483d;background:linear-gradient(125deg,#0d1a1b,#0b131b);padding:46px;border-radius:16px}.contact-box h2{margin-bottom:18px}.contact-box .section-lead{margin:0}.contact-links{display:flex;flex-direction:column}.contact-links>a{display:flex;align-items:center;gap:13px;padding:15px 0;border-bottom:1px solid var(--line)}.contact-links>a:last-child{border-bottom:0}.contact-icon{width:36px;height:36px;display:grid;place-items:center;background:#122a21;border-radius:8px;color:var(--green);font-family:var(--mono)}.contact-links a>span:nth-child(2){display:flex;flex-direction:column;min-width:0}.contact-links small{font-size:10px;color:var(--muted)}.contact-links strong{font-size:11px;overflow-wrap:anywhere}.arrow{margin-left:auto;color:var(--green)}.footer{border-top:1px solid var(--line);padding:25px 0 18px}.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px}.footer-inner p,.back-top{font-size:11px;color:var(--muted)}.copyright{border-top:1px solid #172630;margin-top:20px;padding-top:16px;color:#6f828b;font-size:10px}.skip-link{position:absolute;left:-999px;top:0;background:var(--green);color:#07120d;padding:10px;z-index:99}.skip-link:focus{left:10px}
+@media(max-width:900px){.hero{gap:35px;min-height:590px}.skills-grid{grid-template-columns:repeat(2,1fr)}.two-col{gap:45px}.projects-grid{grid-template-columns:1fr 1fr}.contact-box{gap:35px;padding:32px}.hero h1{font-size:clamp(44px,7vw,64px)}}
+@media(max-width:650px){.container{width:min(100% - 32px,520px)}.section{padding:72px 0}.nav{height:66px}.menu-toggle{display:block}.nav-links{display:none;position:absolute;top:66px;left:0;right:0;padding:18px 24px 24px;background:#0a1118;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:12px 4px}.nav-contact{margin-top:8px;text-align:center}.hero{grid-template-columns:1fr;padding-top:65px;padding-bottom:65px;gap:42px}.hero h1{font-size:clamp(48px,14vw,68px)}.hero-intro{font-size:14px}.terminal-card{transform:none}.terminal-body{padding:20px;min-height:0}.two-col{grid-template-columns:1fr;gap:20px}.fact-row{gap:18px;justify-content:space-between}.fact-row strong{font-size:15px}.skills-grid,.projects-grid{grid-template-columns:1fr}.skill-card p{min-height:0}.project-card{min-height:260px}.contact-box{grid-template-columns:1fr;padding:25px;gap:28px}.footer-inner{flex-wrap:wrap}.footer-inner p{order:3;width:100%;margin:0}.copyright{margin-top:15px}.hero-meta{gap:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+''',
+"script.js": r'''// Mobile navigation and small progressive enhancements.
+const menuButton = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+
+if (menuButton && navLinks) {
+  menuButton.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+    });
+  });
+}
+
+const year = document.querySelector("#year");
+if (year) year.textContent = new Date().getFullYear();
+''',
+"README.md": r'''# Abu Noman — Cybersecurity Portfolio
+
+A responsive personal portfolio built with semantic HTML, CSS, and vanilla JavaScript. No framework or build step is required.
+
+## Run locally
+
+1. Extract the ZIP file.
+2. Open the `cybersecurity-portfolio` folder.
+3. Double-click `index.html`, or use VS Code with the Live Server extension.
+
+## Before publishing
+
+Search the files for these placeholders and replace them with your real details:
+
+- `YOUR_EMAIL@example.com`
+- `YOUR_GITHUB`
+- `YOUR_LINKEDIN`
+
+Also review all education, skill, and project text. The project cards are starter examples/plans; only present them as completed projects after you have actually completed the work. Add links to real GitHub repositories when available.
+
+## Project structure
+
+```text
+cybersecurity-portfolio/
+├── index.html
+├── styles.css
+├── script.js
+└── README.md
+```
+
+## Publish free with GitHub Pages
+
+1. Create a GitHub repository, for example `abu-noman-portfolio`.
+2. Upload these four files to the repository's root.
+3. Open **Settings → Pages**.
+4. Under the build/deployment section, choose **Deploy from a branch**, select `main` and `/ (root)`, then save.
+5. Wait for GitHub Pages to publish the site. The public URL will be shown in Settings → Pages.
+
+## Notes
+
+- The contact links open email or external profile pages; this static site does not store messages.
+- Google Fonts require an internet connection. System fallback fonts are provided.
+- Use this portfolio only to describe your real skills and authorized security testing.
+'''
+}
+
+for name, content in files.items():
+    with open(os.path.join(base, name), "w", encoding="utf-8") as f:
+        f.write(content)
+
+zip_path = "/mnt/data/abu_noman_cybersecurity_portfolio.zip"
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for name in files:
+        z.write(os.path.join(base, name), arcname=f"cybersecurity-portfolio/{name}")
+
+print("Created portfolio project:")
+print(zip_path)
+print("Files:", ", ".join(files.keys()))
